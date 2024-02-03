@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% block content %}
+<html>
+    <head> Phishing Campaigns Dashboard</head>
+
+    <body>
+        Welcome {{ user.get_username }}.
+
+        This is a Dashboard for all the phishing campaings.
+        <div1><button> <a href="{% url 'phishing:emailsinput' %}">Add a Phishing Email Campaign </a></button></div1>
+        {% if campaigns %}
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <th>I.T. Provider</th>
+                    <th>Company Name</th>
+                    <th>Campaign Name</th>
+                    <th>Total Clicks</th>
+                </thead>
+                {% for campaign in campaigns %}
+                {% if campaign.hidden != True %}
+                <tr>
+                    <td>{{campaign.msp_id}}</td>
+                    <td>{{campaign.company_name}}</td>
+                    <td><a href="{% url 'phishing:campaign_dashboard' campaign.campaign_id %}">{{campaign.campaign_name}}</a></td>
+                    <td>Do math here</td>
+                    
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+    {%else%}
+        <p>You have 0 email phishing campaigns. Start your first one today!.</p>
+    {% endif %}
+
+
+    </body>
+
+
+
+</html>
+
+{%endblock%}

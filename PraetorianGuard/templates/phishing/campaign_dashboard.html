@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+{% block content %}
+{% if campaigns %}
+{% for campaign in campaigns %}
+<!---{% block title %}<p> {{campaign.company_name}}'s {{campaign.campaign_name}} </p>{%endblock%}-->
+
+
+    
+    <body>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{campaign.company_name}}'s {{campaign.campaign_name}}</h6>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-secondary btn-block btn-margin" >Retire</button>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        
+            <thead>
+                <th>I.T. Provider</th>
+                <th>Company Name</th>
+                <th>Campaign Name</th>
+                <th>Total Clicks</th>
+                
+            </thead>
+            <tr>
+                <td>{{campaign.msp_id}}</td>
+                <td>{{campaign.company_name}}</td>
+                <td>{{campaign.campaign_name}}</td>
+                <td>Do math here</td>
+                    
+                </tr>
+            </table>
+            <br></br>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">User Responses</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <th>Email Address</th>
+                <th>Email Clicked</th>
+                <th>Email Clicked Time</th>
+                <th>Link Clicked</th>
+                <th>Link Clicked Time</th>
+            </thead>
+            {% for x in tracking %}
+            <tr>
+                <td>{{x.target_email}}</td>
+                <td>{{x.email_clicked}}</td>
+                <td>{{x.email_clicked_time}}</td>
+                <td>{{x.link_clicked}}</td>
+                <td>{{x.link_clicked_time}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </body>
+
+
+
+{%endfor%}
+{% else %}
+<p>Opps</p>
+{%endif%}
+
+{%endblock%}

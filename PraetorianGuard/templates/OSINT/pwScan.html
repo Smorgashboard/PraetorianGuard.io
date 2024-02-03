@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h6>PW Scan</h6>
+<p>This Paragraph has a verification text. {{company.verification}}</p>
+<section id="register" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4>
+                <i class="fas fa-user-plus"></i> OSINT Scans</h4>
+                <h5><i>Legal stuff.</i></h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                  <label for="scan_type">Scan Type</label>
+                  <input type="password" name="target" placeholder="Password" class="form-control">
+                </div>
+                <button name="button" onclick="checkPW('test')">CHECK!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{%endblock%}

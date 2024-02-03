@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% block title %} <p>Welcome, {{ user.get_username }}. </p> {%endblock%}
+<body>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">{{user.get_username}}'s Dashboard</h6>
+        </div>
+        <br>
+    <div1><a href="{% url 'home:addcompany' %}">Add Company</a></div1>
+    {% if companies %}
+    <div class="card-body">
+        <br>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <th>Company Name</th>
+                    <th>Company Public IP</th>
+                    <th>Company Primary Domain</th>
+                    <th>Domain Verified</th>
+                </thead>
+                {% for company in companies %}
+                <tr>
+                    <td><a href="{% url 'home:comp_dashboard' company.id %}">{{company.company_name}}</a></td>
+                    <td>{{company.public_ip}}</td>
+                    <td>{{company.company_domain}}</td> 
+                    <td>{{company.is_verified}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+    {%else%}
+        <p>Oh snap you have 0 companies registered.</p>
+    {% endif %}
+
+</body>
+
+{% endblock %}

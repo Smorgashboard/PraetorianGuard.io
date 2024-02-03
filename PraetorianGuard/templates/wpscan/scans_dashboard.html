@@ -1,0 +1,154 @@
+{% extends 'base.html'%}
+{% block content %}
+{% if scans %}
+{% for scan in scans %}
+<!---{% block title %}<p> {{campaign.company_name}}'s {{campaign.campaign_name}} </p>{%endblock%}-->
+
+
+    
+    <body>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{scan.target}}</h6>
+                <br>
+                <div> <h6 class="m-0 font-weight-bold text-gray-800">WPScan Results: <span class="text-danger">{{sumalerts}}</span><span class="text-warning"> {{sumwarns}}</span><span class="text-info"> {{suminfo}}</span><span class="text-dark"> {{sumerror}}</span></h6></div>
+                <br>
+                <a href="{% url 'wpscan:htmlresults' scan.scan_id %}" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-info-circle"></i>
+                    </span>
+                    <span class="text">HTML View</span>
+                </a>
+                <div class="card-header py3"><h6 class="m-0 font-weight-bold text-success text-lg text-uppercase">Scan Summary :</h6></div>
+                <div class="row">
+                    <!--Alerts Card-->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-danger shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Vulnerabilities</div>
+                                        <div class="h5 mb-0 font-weight-bold text-danger">{{alerts|length}}</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-exclamation fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Warning Card -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Warnings</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{warns|length}}</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Info Card -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Info</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{info|length}}</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Error Card -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-dark shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Errors</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{errors|length}}</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-danger">Vulnerabilities</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample">
+                    <div class="card-body">
+                        {%for alert in alerts%}<h5>{{alert}}</h5>{%endfor%}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-warning">Warnings</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample">
+                    <div class="card-body">
+                        {%for warn in warns%}<h5>{{warn}}</h5>{%endfor%}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-info">Info</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample">
+                    <div class="card-body">
+                        {%for x in info%}<h5>{{x}}</h5>{%endfor%}
+                    </div>
+                </div>
+            </div>
+            <br>
+            {%if errors%}
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-dark">Errors</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample">
+                    <div class="card-body">
+                        {%for error in errors%}{{error}}{%endfor%}
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            
+    </body>
+
+
+{%endfor%}
+{% else %}
+<p>opps</p>
+{%endif%}
+
+{%endblock%}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if danger%}
+{% for x in danger %}
+<h1>Danger: {{x}}</h1>
+{%endfor%}
+{%endif%}
+{%if emails%}
+{%for x in emails%}
+<h1>Emails: {{x}}</h1>
+{%endfor%}
+{%endif%}
+{%if pws%}
+{%for x in pws%}
+<h1>Passwords: {{x}}</h1>
+{%endfor%}
+{%endif%}
+{%if addresses%}
+{%for x in addresses%}
+<h1>Addresses: {{x}}</h1>
+{%endfor%}
+{%endif%}
+{%if ips%}
+{%for x in ips%}
+<h1>IP addresses: {{x}}</h1>
+{%endfor%}
+{%endif%}
+{%if users%}
+{%for x in users%}
+<h1>Usernames: {{x}}</h1>
+{%endfor%}
+{%endif%}
+{% endblock %}

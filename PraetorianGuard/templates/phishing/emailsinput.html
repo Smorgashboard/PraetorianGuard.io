@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} | Phishing Input {%endblock%}
+{% block content%}
+
+<section id="register" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4>
+                <i class="fas fa-user-plus"></i> Create a Phishing Campaign</h4>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'phishing:emailsinput' %}" method="POST">
+                    {% csrf_token%}
+                <div class="form-group">
+                  <label for="company_name">Company Name</label>
+                  <select name="company_name">
+                    {% for company in companies%}
+                    <option value="{{company.company_name}}">{{company.company_name}}</option>
+                    {% if company.is_verified != True %}
+                    <div>ALERT</div>
+                    {%endif%}
+                    {% endfor %}
+                  </select>
+                  <label for="template_name">Template Name</label>
+                  <select name="template_name">
+                    <option value="Microsoft">Microsoft</option>
+                    <option value="Google">Google</option>
+                  </select>
+                  <div><br></div>
+                  <input type="hidden" name="job_id" id="myDate">
+                  <label for ="campagin_name">Campaign Name</label>
+                  <input type="Text" name="campaign_name" class="form-control" maxlength="64" required>
+                  <label for="email">Emails</label>
+                  <input type="email" name="email_1" class="form-control" maxlength="64" required> 
+                </div>
+                <button type="button" onclick="addTxt()">Add Another Email</button>
+                <button type="button" onclick="removeEmail()">Remove Email</button>
+                <input type="submit" value="Submit" class="btn btn-secondary btn-block btn-margin" onclick="getDate()">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  {%endblock%}

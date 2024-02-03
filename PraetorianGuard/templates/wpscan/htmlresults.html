@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} | WPScan Input {%endblock%}
+{% block content%}
+<div class="container-fluid">
+<div class="card shadow px-4 py-4 pr-4 pb-4 bg-gray-300 text-dark">
+<h6 class="m-0 font-weight-bold text-success"> Raw Results for {%for scan in scans %}{{scan.target}}{%endfor%}</h6>
+    <br>
+{%if html%}
+{%autoescape off%}{{html}} {%endautoescape%}
+{%endif%}
+</div>
+</div>
+</div>
+{%endblock%}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h6>DNS VERIFICATION!</h6>
+{% if companies %}
+{% for company in companies %}
+<p>This Paragraph has a verification text. {{company.verification}}</p>
+
+<button name="button" onclick="checkDNS('{{company.primary_mail_domain}}','{{company.verification}}')">CHECK!</button>
+{%endfor%}
+{%endif%}
+{%endblock%}

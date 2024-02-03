@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+{% block content %}
+<html>
+    <head> Phishing Campaigns Dashboard</head>
+
+    <body>
+        Welcome {{ user.get_username }}.
+
+        This is a Dashboard for all the phishing campaings.
+        <div1><button> <a href="{% url 'wpscan:scan' %}">SCANIT</a></button></div1>
+        {% if scans %}
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <th>I.T. Provider</th>
+                    <th>Company Name</th>
+                    <th>Campaign Name</th>
+                    <th>Total Clicks</th>
+                </thead>
+                {% for scan in scans %}
+                <tr>
+                    <td>{{scan.msp_id}}</td>
+                    <td>{{scan.company_name}}</td>
+                    {%if scan.completed == True %}
+                    <td><a href="{% url 'wpscan:scans_dashboard' scan.scan_id %}">{{scan.scan_name}}</a></td> {%else%} <td>{{scan.scan_name}}</td>{%endif%}
+                    <td>Do math here</td>
+                </tr>
+                {% endfor %}
+            </table>
+    {%else%}
+        <p>You haven't run a WordPress scan yet. Start your first one today!.</p>
+    {% endif %}
+
+
+    </body>
+
+
+
+</html>
+
+{%endblock%}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<hi><button class="btn-success" onclick="addScan()">Scan another PW</button></hi>
+
+<h1>COMPROMISED!</h1>
+<h2>{{target}} comped {{times}} times!</h2>
+{%for x in leakcheck %}
+<h3>{{x}}</h3>
+{%endfor%}
+<div class="div1"></div>
+<form action="{% url 'OSINT:pwScan' %}" method="POST">
+  {%csrf_token%}
+<div id="form-group" class="form-group"></div>
+</form>
+{% endblock %}
